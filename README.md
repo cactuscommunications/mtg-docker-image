@@ -1,0 +1,1 @@
+## Docker Base Image for MTG PHP project
