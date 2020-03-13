@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash && \ 
     apt-get update && apt-get install -y \
     make gcc g++ build-essential git unzip zlib1g-dev\
+    inkscape \
     libmagickcore-dev \
     libmagickwand-dev \
     libmcrypt-dev \
