@@ -25,7 +25,7 @@ WORKDIR /var/www/
 
 # PHP Extensions and Composer
 RUN pecl install imagick && docker-php-ext-enable imagick
-RUN docker-php-ext-install zip mcrypt mysqli
+RUN docker-php-ext-install zip mcrypt mysqli gd
 RUN curl -s http://getcomposer.org/installer | php
 
 # PHP ini config
