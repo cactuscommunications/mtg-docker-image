@@ -29,7 +29,7 @@ RUN docker-php-ext-install zip mcrypt mysqli gd
 RUN curl -s http://getcomposer.org/installer | php
 
 # PHP ini config
-RUN echo '\nmemory_limit=512M\nupload_max_filesize=64M\npost_max_size=64M\nmax_execution_time=6000\ndefault_socket_timeout=6000\nmysql.connect_timeout=6000' > /usr/local/etc/php/conf.d/99-mtg-configs.ini
+RUN echo '\nmemory_limit=512M\nupload_max_filesize=128M\npost_max_size=128M\nmax_execution_time=6000\ndefault_socket_timeout=6000\nmysql.connect_timeout=6000' > /usr/local/etc/php/conf.d/99-mtg-configs.ini
 
 # Libreoffice config
 RUN sed -i 's;Logo=1;Logo=0;g' /etc/libreoffice/sofficerc
