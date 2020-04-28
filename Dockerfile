@@ -34,6 +34,9 @@ RUN echo '\nmemory_limit=512M\nupload_max_filesize=128M\npost_max_size=128M\nmax
 # Libreoffice config
 RUN sed -i 's;Logo=1;Logo=0;g' /etc/libreoffice/sofficerc
 
+# Unoconv config
+RUN sed -i 's/\#includedir \/etc\/sudoers\.d/www\-data ALL\=NOPASSWD\: \/usr\/bin\/unoconv/g' /etc/sudoers
+
 # Clear apt source lists
 RUN rm -rf /var/lib/apt/lists/*
 
