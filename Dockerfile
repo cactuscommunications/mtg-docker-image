@@ -11,6 +11,7 @@ RUN curl -sL https://deb.nodesource.com/setup_8.x | bash && \
     libmagickwand-dev \
     libmcrypt-dev \
     unoconv \
+    ffmpeg \
     npm nodejs
 
 # Fonts
