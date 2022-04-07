@@ -1,26 +1,26 @@
-FROM php:5.6-apache
+FROM "php:5.6-fpm"
 
-ENV DEBIAN_FRONTEND noninteractive
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash
 
-# Dependencies
-RUN curl -sL https://deb.nodesource.com/setup_8.x | bash && \ 
-    apt-get update && apt-get install -y \
-    make gcc g++ build-essential git unzip zlib1g-dev\
+RUN apt-get update && apt-get install -y \
+    make gcc g++ build-essential git unzip zlib1g-dev automake\
     inkscape \
     libmagickcore-dev \
     libmagickwand-dev \
     libmcrypt-dev \
     unoconv \
     ffmpeg \
-    npm nodejs
+    npm nodejs \
+    nginx \
+    supervisor
 
 # Fonts
 RUN curl -sLO https://github.com/google/fonts/archive/master.zip
 RUN unzip master.zip && \
     rm master.zip && \
-    cp -rvf fonts-master /usr/share/fonts && \
+    cp -rvf fonts-main /usr/share/fonts && \
     fc-cache -fv && \
-    rm -Rf fonts-master
+    rm -Rf fonts-main
 
 WORKDIR /var/www/
 
@@ -28,19 +28,3 @@ WORKDIR /var/www/
 RUN pecl install imagick && docker-php-ext-enable imagick
 RUN docker-php-ext-install zip mcrypt mysqli gd
 RUN curl -s http://getcomposer.org/installer | php
-
-# PHP ini config
-RUN echo '\nmemory_limit=512M\nupload_max_filesize=128M\npost_max_size=128M\nmax_execution_time=6000\ndefault_socket_timeout=6000\nmysql.connect_timeout=6000' > /usr/local/etc/php/conf.d/99-mtg-configs.ini
-
-# Libreoffice config
-RUN sed -i 's;Logo=1;Logo=0;g' /etc/libreoffice/sofficerc
-
-# Unoconv config
-# RUN sed -i 's/\#includedir \/etc\/sudoers\.d/www\-data ALL\=NOPASSWD\: \/usr\/bin\/unoconv/g' /etc/sudoers
-
-# Clear apt source lists
-RUN rm -rf /var/lib/apt/lists/*
-
-RUN usermod -u 1000 www-data
-
-EXPOSE 80
