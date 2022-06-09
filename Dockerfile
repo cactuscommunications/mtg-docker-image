@@ -14,13 +14,6 @@ RUN apt-get update && apt-get install -y \
     nginx \
     supervisor
 
-# Fonts
-RUN curl -sLO https://github.com/google/fonts/archive/master.zip
-RUN unzip master.zip && \
-    rm master.zip && \
-    cp -rvf fonts-main /usr/share/fonts && \
-    fc-cache -fv && \
-    rm -Rf fonts-main
 
 WORKDIR /var/www/
 
