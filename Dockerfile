@@ -25,6 +25,8 @@ RUN unzip master.zip && \
 WORKDIR /var/www/
 
 # PHP Extensions and Composer
+RUN pecl channel-update pecl.php.net
+RUN pecl install redis-2.2.8 && docker-php-ext-enable redis
 RUN pecl install imagick && docker-php-ext-enable imagick
 RUN docker-php-ext-install zip mcrypt mysqli gd
 RUN curl -s http://getcomposer.org/installer | php
